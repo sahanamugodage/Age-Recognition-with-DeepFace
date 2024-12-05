@@ -65,5 +65,4 @@ python src/app.py
 
 ## The Application Looks Like
 
-- Intor Imgage
-  ![alt text](image.png)
+![alt text](image.png)
