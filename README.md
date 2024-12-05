@@ -33,14 +33,20 @@ cd project
 
 ## File Structure
 
-- This File Structure is In the src Folder
-  .
-  ├── app.py # Main Flask application
-  ├── templates/
-  │ └── upload.html # HTML template for the upload page
-  ├── uploads/ # Temporary storage for uploaded files
-  ├── requirements.txt # Python dependencies
-  └── README.md # Project documentation
+Here’s the file structure of the project:
+
+```plaintext
+project/
+├── src/
+│   ├── app.py                # Main Flask application
+│   ├── templates/
+│   │   └── upload.html       # HTML template for the upload page
+│   ├── uploads/              # Temporary storage for uploaded files
+│   ├── requirements.txt      # Python dependencies
+│   └── README.md             # Project documentation
+└── LICENSE                   # License information
+
+```
 
 ## Runnuing the Application
 
