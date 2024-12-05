@@ -41,3 +41,23 @@ cd project
   ├── uploads/ # Temporary storage for uploaded files
   ├── requirements.txt # Python dependencies
   └── README.md # Project documentation
+
+## Runnuing the Application
+
+```bash
+cd project
+cd src
+python app.py
+```
+
+## Running the Application (from the root directory)
+
+```bash
+cd project
+python src/app.py
+```
+
+## The Application Looks Like
+
+- Intor Imgage
+  ![alt text](image.png)
