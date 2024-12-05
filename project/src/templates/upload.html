@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Image for Analysis</title>
+    <link rel="stylesheet" href="./upload.css" />
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+    }
+    .container {
+      background-color: whitesmoke;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .content {
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      width: 100%;
+      padding: 1rem;
+      margin: 1rem;
+    }
+    .upload-section {
+      padding: 1rem;
+      margin: 1rem;
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+    }
+    .header-group {
+      background-color: rgb(72, 163, 255);
+      color: white;
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 3rem;
+      text-align: center;
+    }
+    .upload-box {
+      width: 100%;
+      height: 400px;
+      border: 2px dashed rgb(72, 163, 255);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 1rem auto;
+      cursor: pointer;
+      background-color: white;
+    }
+    .upload-box.hover {
+      background-color: rgba(72, 163, 255, 0.1);
+    }
+    .upload-input {
+      display: none;
+    }
+    .button-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .upload-button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: rgb(72, 163, 255);
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      width: 50%;
+    }
+    .output-section {
+      padding: 1rem;
+      margin: 1rem;
+      width: 100%;
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .output-box {
+      width: 100%;
+      height: auto;
+      border: 2px solid transparent;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: white;
+      flex-direction: column;
+      position: relative;
+      display: none;
+    }
+    .output-image {
+      border-radius: 50%;
+      width: 200px;
+      height: auto;
+      border-radius: 1rem;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      display: none;
+    }
+    .output-text {
+      color: rgb(51, 143, 255);
+      margin-top: 10px;
+    }
+    .flashed-messages {
+      list-style-type: none;
+      padding: 1rem;
+      margin: 1rem 0;
+      color: black;
+      font-weight: bold;
+      background-color: #e6f7ff;
+      border: 1px solid rgb(72, 163, 255);
+      border-radius: 0.5rem;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
+    }
+
+    .flashed-messages .messeges {
+      margin: 0.5rem 0;
+      padding: 0.8rem;
+      border-radius: 0.5rem;
+    }
+
+    .output-box {
+      width: 100%;
+      height: auto;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: white;
+      position: relative;
+      padding: 1rem;
+    }
+
+    .output-image {
+      border-radius: 1rem;
+      width: 200px;
+      height: auto;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .output-details {
+      margin-top: 1rem;
+    }
+
+    .age-gender {
+      margin: 1rem 0;
+    }
+
+    .age-gender p {
+      margin: 0.5rem 0;
+    }
+
+    #genderList {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="content">
+        <div class="upload-section">
+          <div class="header-group">
+            <h2>Upload Your Image To Recognize the Age</h2>
+          </div>
+          <label class="upload-box" id="uploadBox">
+            Drag & Drop your image here or click to select
+            <input
+              type="file"
+              name="file"
+              class="upload-input"
+              id="fileInput"
+              accept="image/*"
+              required
+            />
+          </label>
+          <div class="button-group">
+            <button type="submit" class="upload-button" onclick="submitForm()">
+              Upload
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="output-section">
+          <div class="header-group">
+            <h2>Guess Your Age 😉</h2>
+          </div>
+
+          {% with messages = get_flashed_messages() %} {% if messages %}
+          <ul class="flashed-messages">
+            {% for message in messages %}
+            <li class="messeges">{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %} {% endwith %}
+
+          <div class="output-box" id="outputBox">
+            <img id="outputImage" class="output-image" alt="Uploaded Image" />
+            <div class="output-text" id="outputText"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const uploadBox = document.getElementById("uploadBox");
+      const fileInput = document.getElementById("fileInput");
+      const outputBox = document.getElementById("outputBox");
+      const outputImage = document.getElementById("outputImage");
+      const outputText = document.getElementById("outputText");
+      const flashedMessages = document.querySelector(".flashed-messages");
+
+      function clearFlashedMessages() {
+        if (flashedMessages) {
+          flashedMessages.innerHTML = "";
+        }
+      }
+
+      uploadBox.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        uploadBox.classList.add("hover");
+      });
+
+      uploadBox.addEventListener("dragleave", () => {
+        uploadBox.classList.remove("hover");
+      });
+
+      uploadBox.addEventListener("drop", (event) => {
+        event.preventDefault();
+        uploadBox.classList.remove("hover");
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+          fileInput.files = files;
+          clearFlashedMessages();
+          displayImage(files[0]);
+        }
+      });
+
+      fileInput.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
+      fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (file) {
+          clearFlashedMessages();
+          displayImage(file);
+        } else {
+          resetOutput();
+        }
+      });
+
+      function displayImage(file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          outputImage.src = e.target.result;
+          outputImage.style.display = "block";
+          outputText.textContent = file.name;
+          outputBox.style.display = "flex";
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function resetOutput() {
+        outputImage.style.display = "none";
+        outputText.textContent = "";
+        outputBox.style.display = "none";
+      }
+
+      function submitForm() {
+        const form = document.createElement("form");
+        form.action = "{{ url_for('upload_file') }}";
+        form.method = "POST";
+        form.enctype = "multipart/form-data";
+
+        const fileInputClone = fileInput.cloneNode();
+        form.appendChild(fileInputClone);
+        document.body.appendChild(form);
+        form.submit();
+      }
+    </script>
+  </body>
+</html>
