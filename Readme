@@ -21,8 +21,9 @@ Make sure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/age-recognition-app.git
-cd age-recognition-app
+git clone https://github.com/sahanamugodage/Age-Recognition-with-DeepFace.git
+cd Age-Recognition-with-DeepFace
+cd project
 ```
 
 - python -m venv venv
@@ -32,10 +33,11 @@ cd age-recognition-app
 
 ## File Structure
 
-.
-├── app.py # Main Flask application
-├── templates/
-│ └── upload.html # HTML template for the upload page
-├── uploads/ # Temporary storage for uploaded files
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
+- This File Structure is In the src Folder
+  .
+  ├── app.py # Main Flask application
+  ├── templates/
+  │ └── upload.html # HTML template for the upload page
+  ├── uploads/ # Temporary storage for uploaded files
+  ├── requirements.txt # Python dependencies
+  └── README.md # Project documentation
