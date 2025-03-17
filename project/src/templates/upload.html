@@ -302,6 +302,16 @@
         document.body.appendChild(form);
         form.submit();
       }
+      function displayImage(file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          outputImage.src = e.target.result;
+          outputImage.style.display = "block";
+          outputText.innerHTML = `<strong>Selected Image - </strong> ${file.name}`; // Clearer message
+          outputBox.style.display = "flex";
+        };
+        reader.readAsDataURL(file);
+      }
     </script>
   </body>
 </html>

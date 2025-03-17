@@ -72,10 +72,11 @@ def upload_file():
         age = result['age']
         gender = result['gender']
         dominant_emotion = result['dominant_emotion']
+        highest_gender = max(gender, key=gender.get)
 
         # Flash the results to display on the homepage
         flash(f'Estimated Age: {age}')
-        flash(f'Gender: {gender}')
+        flash(f'Gender: {highest_gender}')
         flash(f'Dominant Emotion: {dominant_emotion}')
 
     except Exception as e:
